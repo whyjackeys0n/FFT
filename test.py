@@ -2,7 +2,6 @@ import statsmodels.datasets
 import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
-import statsmodels.api as sm
 
 data = statsmodels.datasets.co2.load_pandas().data
 data.co2.interpolate(inplace=True)
@@ -21,8 +20,8 @@ plt.ylabel('CO2')
 plt.xlabel('Week')
 plt.show()
 
-# apply fast fourier transform and take absolute values
-f = abs(np.fft.fft(y))
+# apply fast fourier transform
+f = np.fft.fft(y)
 
 # get the list of frequencies
 num = np.size(x)
@@ -49,7 +48,3 @@ plt.semilogy(grouped_week.index, grouped_week)
 plt.xticks([1, 13, 26, 39, 52])
 plt.show()
 
-# use the seasonal_decompose function to observe the same conclusion
-res = sm.tsa.seasonal_decompose(data.co2)
-resplot = res.plot()
-resplot.show()
